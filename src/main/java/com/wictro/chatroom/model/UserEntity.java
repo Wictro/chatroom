@@ -25,6 +25,9 @@ public class UserEntity {
     @OneToMany(mappedBy = "chatroomOwner")
     private Set<ChatroomEntity> ownedChatrooms;
 
+    @OneToMany(mappedBy = "user")
+    private Set<SessionEntity> userSessions;
+
     public Long getId() {
         return id;
     }
