@@ -1,0 +1,28 @@
+.navigation-container{
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: space-between;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid #424242;
+    margin-bottom: 20px;
+    transition: all ease .2s;
+}
+
+.navigation-container a{
+    text-align: center;
+    flex-grow: 1;
+    padding: 16px 0px 16px 0px;
+    cursor: pointer;
+    text-decoration: unset;
+    color: unset;
+    transition: all ease .2s;
+}
+
+.navigation-container a.active, .navigation-container.single:hover{
+    color: white;
+    background: #424242;
+}

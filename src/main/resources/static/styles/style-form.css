@@ -1,0 +1,40 @@
+form input{
+    font-family: 'Roboto Mono', monospace;
+    padding: 8px 3px 8px 3px;
+    border-radius: unset;
+    border: unset;
+    outline: none;
+    width: 550px;
+    font-size: 30px;
+}
+
+form input[type=submit]{
+    width: fit-content;
+    padding: 16px;
+    margin-top: 8px;
+    cursor: pointer;
+    color: #424242;
+    background: white;
+    border: 3px solid #424242;
+    transition: all ease .2s;
+}
+
+form input[type=submit]:hover{
+    background: #424242;
+    color: white;
+}
+
+form fieldset{
+    border: 3px solid #424242;
+}
+
+form legend{
+    font-size: 20px;
+}
+
+.form-container{
+    width: fit-content;
+    height: fit-content;
+    box-sizing: border-box;
+    background: white;
+}

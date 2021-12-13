@@ -11,12 +11,12 @@ public class AuthController {
 
     @GetMapping("/login")
     public String getLogin(){
-        return null;
+        return "auth-templates/login";
     }
 
     @GetMapping("/signup")
     public String getSignup(){
-        return null;
+        return "auth-templates/signup";
     }
 
     @PostMapping("/login")
