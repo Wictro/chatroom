@@ -1,0 +1,58 @@
+.chatrooms-container{
+    width: 100%;
+    padding: 8px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.chatroom-info-element{
+    text-align: center;
+    border: 3px solid #424242;
+    margin-right: 8px;
+    padding: 16px;
+    position: relative;
+    cursor: pointer;
+    background: white;
+    box-sizing: border-box;
+    margin-bottom: 8px;
+    width: 200px;
+    transition: all ease .2s;
+}
+
+.chatroom-info-element:hover{
+    background: #424242;
+    color: white;
+}
+
+.chatroom-info-element h2, .chatroom-info-element h3{
+    margin: 0;
+    padding: 0;
+}
+
+.chatroom-info-element hr{
+    margin: 0;
+    position: absolute;
+    bottom: 3px;
+    left: 5px;
+    right: 5px;
+    height: 2px;
+    border: 0;
+    background: #43ff43;
+}
+
+.new-chatroom{
+    margin-right: 8px;
+    margin-bottom: 8px;
+    width: 200px;
+    text-align: center;
+}
+
+.new-chatroom span{
+    font-size: 42px;
+    cursor: pointer;
+    color: #424242;
+}

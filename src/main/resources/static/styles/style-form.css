@@ -26,6 +26,7 @@ form input[type=submit]:hover{
 
 form fieldset{
     border: 3px solid #424242;
+    margin: 0;
 }
 
 form legend{
@@ -37,4 +38,5 @@ form legend{
     height: fit-content;
     box-sizing: border-box;
     background: white;
+    margin-left: 8px;
 }

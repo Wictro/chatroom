@@ -16,14 +16,13 @@
 </div>
 
 <div class="form-container">
-    <form>
+    <form method="post" action="/auth/signup" th:object="${user}">
         <fieldset>
             <legend>sign up</legend>
-            <input type="text" placeholder="name"><br>
-            <input type="text" placeholder="surname"><br>
-            <input type="date" placeholder="birthday"><br>
-            <input type="email" placeholder="email"><br>
-            <input type="password" placeholder="password"><br>
+            <input type="text" name="firstName" th:field="${user.firstName}" placeholder="name"><br>
+            <input type="text" name="lastName" th:field="${user.lastName}" placeholder="surname"><br>
+            <input type="email" name="email" th:field="${user.email}" placeholder="email"><br>
+            <input type="password" name="password" th:field="${user.password}" placeholder="password"><br>
             <input type="submit" value="go">
         </fieldset>
     </form>

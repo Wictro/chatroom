@@ -16,11 +16,11 @@
 </div>
 
 <div class="form-container">
-    <form>
+    <form method="post" action="/auth/login" th:object="${loginModel}">
         <fieldset>
             <legend>log in</legend>
-            <input type="email" placeholder="email"><br>
-            <input type="password" placeholder="password"><br>
+            <input type="email" name="email" th:field="${loginModel.email}" placeholder="email"><br>
+            <input type="password" name="password" th:field="${loginModel.password}" placeholder="password"><br>
             <input type="submit" value="go">
         </fieldset>
     </form>
