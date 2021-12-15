@@ -1,26 +1,22 @@
 package com.wictro.chatroom.model;
 
-import org.hibernate.annotations.Fetch;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.sql.*;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
 public class UserEntity {
     @Id
     @Column(name = "user_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String firstName;
     private String lastName;
     private String email;
     private String password;
-    private java.sql.Time birthday;
-    private java.sql.Time createdAt;
+    private Date createdAt;
 
     @OneToMany(mappedBy = "chatroomOwner")
     private Set<ChatroomEntity> ownedChatrooms;
@@ -68,15 +64,7 @@ public class UserEntity {
         this.password = password;
     }
 
-    public Time getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Time birthday) {
-        this.birthday = birthday;
-    }
-
-    public Time getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
