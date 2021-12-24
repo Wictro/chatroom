@@ -34,3 +34,58 @@
     cursor: pointer;
     color: #424242;
 }
+
+.chat-settings-body{
+    padding: 8px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.chat-settings-info{
+    margin-bottom: 16px;
+}
+
+.chat-settings-members{
+    margin-bottom: 16px;
+}
+
+input[type=submit]{
+    width: fit-content;
+    padding: 8px;
+    margin-top: 8px;
+    cursor: pointer;
+    color: #424242;
+    background: white;
+    border: 3px solid #424242;
+    transition: all ease .2s;
+}
+
+input[type=submit]:hover, input:disabled{
+    background: #424242;
+    color: white;
+}
+
+input{
+    font-family: 'Roboto Mono', monospace;
+    padding: 8px 3px 8px 3px;
+    border-radius: unset;
+    border: 3px solid #424242;
+    outline: none;
+    font-size: 15px;
+    background: white;
+}
+
+input.danger{
+    border: 3px solid #d72c2c;
+    cursor: pointer;
+}
+
+input.danger:hover{
+    background: #d72c2c;
+    color: white;
+}
+
+fieldset{
+    border: 3px solid #424242;
+    margin: 0;
+}
