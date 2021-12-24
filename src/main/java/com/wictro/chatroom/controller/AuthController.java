@@ -107,8 +107,6 @@ public class AuthController {
 
     @GetMapping("/signout")
     public String getLogout(HttpServletRequest request, HttpServletResponse response, @RequestParam(name = "sid", required = false) String sid){
-        //we check the user's cookies, delete them from the db, set their expiring date to 0, and redirect user to login
-
         UserEntity loggedInUser = authService.getLoggedInUser(request.getCookies());
 
         if(loggedInUser != null){
