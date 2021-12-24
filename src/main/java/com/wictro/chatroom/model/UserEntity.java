@@ -1,5 +1,7 @@
 package com.wictro.chatroom.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.*;
 import java.util.Date;
@@ -15,12 +17,16 @@ public class UserEntity {
     private String firstName;
     private String lastName;
     private String email;
+
+    @JsonIgnore
     private String password;
     private Date createdAt;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "chatroomOwner")
     private Set<ChatroomEntity> ownedChatrooms;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private Set<SessionEntity> userSessions;
 
