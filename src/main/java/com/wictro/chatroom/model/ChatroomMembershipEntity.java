@@ -6,6 +6,7 @@ import java.sql.Time;
 @Entity
 public class ChatroomMembershipEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @ManyToOne
@@ -17,6 +18,13 @@ public class ChatroomMembershipEntity {
     private ChatroomEntity chatroomEntity;
 
     private java.sql.Time joinedSince;
+
+    public ChatroomMembershipEntity(){}
+
+    public ChatroomMembershipEntity(UserEntity userEntity, ChatroomEntity chatroomEntity){
+        this.userEntity = userEntity;
+        this.chatroomEntity = chatroomEntity;
+    }
 
     public Long getId() {
         return id;
