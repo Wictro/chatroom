@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/styles/style-navigation.css">
     <link rel="stylesheet" href="/styles/style.css">
     <link rel="stylesheet" href="/styles/style-dashboard.css">
+    <link rel="stylesheet" href="/styles/style-form.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet">
     <title>Dashboard</title>
@@ -22,12 +23,32 @@
         <span class="material-icons">add</span>
     </div>
 
-    <div class="chatroom-info-element" th:each="chatroom : ${chatrooms}">
-        <h2 class="chatroom-info-name" th:text="${chatroom.getChatroomDisplayName()}"></h2>
-        <h3 class="chatroom-info-code" th:text="${chatroom.getChatroomCode()}"></h3>
+    <div class="chatroom-info-element" th:each="chatroom : ${chatrooms}" th:attr="onclick=|openChatroom('${chatroom.getChatroomCode()}')|" >
+        <h2 class="chatroom-info-name" th:text="${chatroom.getDisplayName()}"></h2>
+        <h3 class="chatroom-info-code" th:text="'[' + ${chatroom.getChatroomCode()} + ']'"></h3>
         <hr>
+    </div>
+</div>
+
+<div class="popup-background-container" style="display: none">
+    <div class="popup-container">
+        <div class="navigation-container">
+            <a class="active">create chatroom</a>
+            <a>join chatroom</a>
+        </div>
+        <form method="post" action="/chatroom" id="popup-create" class="popup-form-container">
+            <input type="text" placeholder="chatroom name" name="displayName"><br>
+            <input type="submit" value="create">
+        </form>
+        <form method="post" action="/chatroom/join" id="popup-join" class="popup-form-container" style="display: none">
+            <input type="text" placeholder="chatroom code" name="chatroomCode"><br>
+            <input type="submit" value="join">
+        </form>
     </div>
 
 </div>
+
+
+<script src="/js/dashboard.js"></script>
 </body>
 </html>
