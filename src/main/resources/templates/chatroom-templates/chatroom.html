@@ -85,7 +85,8 @@
                 <!--Admins have an extra row to invite other users-->
             </fieldset>
 
-            <input th:if="${!owner}" id = "leaveChatroomButton" class="danger" type="button" value="leave this chat">
+            <input th:if="${!owner}" id = "leaveChatroomButton" class="danger" type="button" value="leave this chatroom">
+            <input th:if="${owner}" id = "deleteChatroomButton" class="danger" type="button" value="delete this chatroom">
         </div>
     </div>
 </div>

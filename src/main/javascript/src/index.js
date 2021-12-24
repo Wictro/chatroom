@@ -1,5 +1,5 @@
 import setupButtonFunctions from "./chat-button-functions";
-import {setupChatInput, sendText, inputArea, updateChat, scrollToBottom} from "./chat-input";
+import {setupChatInput, sendText, inputArea, updateChat, scrollToBottom, baseUrl} from "./chat-input";
 import 'whatwg-fetch'
 
 window.chatroomId = location.pathname.split("/")[2];
@@ -51,12 +51,25 @@ updateChatroomButton?.addEventListener("click", () => {
 let leaveChatroomButton = document.querySelector("#leaveChatroomButton");
 
 leaveChatroomButton?.addEventListener("click", () => {
-    if(window.confirm("Are you sure you want to leave this chat?")){
+    if(window.confirm("Are you sure you want to leave this chatroom?")){
         clearInterval(updateInterval);
-        fetch(`http://10.45.0.160:8085/chatroom/${window.chatroomId}/leave`, {
+        fetch(`${baseUrl}/chatroom/${window.chatroomId}/leave`, {
             method: 'POST'
         }).then(response => {
-            location.href = "http://10.45.0.160:8085/dashboard";
+            location.href = `${baseUrl}/dashboard`;
         });
     }
-})
+});
+
+let deleteChatroomButton = document.querySelector("#deleteChatroomButton");
+
+deleteChatroomButton?.addEventListener("click", () => {
+    if(window.confirm("Are you sure you want to delete this chatroom?")){
+        clearInterval(updateInterval);
+        fetch(`${baseUrl}/chatroom/${window.chatroomId}/leave`, {
+            method: 'POST'
+        }).then(response => {
+            location.href = `${baseUrl}/dashboard`;
+        });
+    }
+});

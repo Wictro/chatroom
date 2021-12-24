@@ -42,10 +42,11 @@ public class ChatroomEntity {
         return chats;
     }
 
-    public ChatroomEntity(UserEntity userEntity, String displayName, String chatroomCode){
+    public ChatroomEntity(UserEntity userEntity, String displayName, String chatroomCode, String chatroomPassword){
         this.setDisplayName(displayName);
         this.setChatroomCode(chatroomCode);
         this.setChatroomOwner(userEntity);
+        this.setPassword(chatroomPassword);
     }
 
     public ChatroomEntity(){}

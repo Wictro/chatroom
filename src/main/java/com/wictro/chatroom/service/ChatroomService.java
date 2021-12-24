@@ -48,15 +48,15 @@ public class ChatroomService {
         this.chatroomEntityRepository = chatroomEntityRepository;
     }
 
-    public void createChatroom(UserEntity userEntity, String chatroomName){
-        ChatroomEntity chatroom = new ChatroomEntity(userEntity, chatroomName, this.getRandomCode());
+    public void createChatroom(UserEntity userEntity, String chatroomName, String chatroomPassword){
+        ChatroomEntity chatroom = new ChatroomEntity(userEntity, chatroomName, this.getRandomCode(), chatroomPassword);
         chatroomEntityRepository.save(chatroom);
 
         ChatroomMembershipEntity membership = new ChatroomMembershipEntity(userEntity, chatroom);
         chatroomMembershipEntityRepository.save(membership);
     }
 
-    public boolean saveUserToChatroom(UserEntity user, String chatroomCode){
+    public boolean saveUserToChatroom(UserEntity user, String chatroomCode, String sentPassword){
         ChatroomEntity chatroom = chatroomEntityRepository.findChatroomEntityByChatroomCode(chatroomCode);
 
         if(chatroom == null)
@@ -64,6 +64,9 @@ public class ChatroomService {
 
 
         if(chatroomMembershipEntityRepository.findChatroomMembershipEntityByChatroomEntityAndUserEntity(chatroom, user) != null)
+            return false;
+
+        if(!sentPassword.equals(chatroom.getPassword()))
             return false;
 
         ChatroomMembershipEntity membership = new ChatroomMembershipEntity(user, chatroom);

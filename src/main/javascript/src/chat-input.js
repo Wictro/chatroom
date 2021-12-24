@@ -1,11 +1,13 @@
 let inputArea = document.querySelector(".chat-input");
 
+let baseUrl = 'http://10.45.0.28:8085';
+
 function setupChatInput(){
     inputArea = document.querySelector(".chat-input");
 }
 
 function updateChat(){
-    fetch(`http://10.45.0.160:8085/chatroom/${window.chatroomId}/chat`)
+    fetch(`${baseUrl}/chatroom/${window.chatroomId}/chat`)
         .then(response => response.json())
         .then(data => {
             clearChat();
@@ -69,7 +71,7 @@ function sendText(){
 }
 
 function sendMessage(message){
-    fetch(`http://10.45.0.160:8085/chatroom/${window.chatroomId}/chat`, {
+    fetch(`${baseUrl}/chatroom/${window.chatroomId}/chat`, {
         method: 'POST',
         body: JSON.stringify({
             text: message
@@ -113,4 +115,4 @@ function getFormattedTime(){
     return hour + ":" + minutes;
 }
 
-export {setupChatInput, sendText, inputArea, updateChat, scrollToBottom};
+export {setupChatInput, sendText, inputArea, updateChat, scrollToBottom, baseUrl};

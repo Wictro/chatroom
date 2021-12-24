@@ -3,7 +3,6 @@ package com.wictro.chatroom.controller;
 import com.wictro.chatroom.dto.request.ChatroomUpdateRequest;
 import com.wictro.chatroom.model.ChatroomEntity;
 import com.wictro.chatroom.model.UserEntity;
-import com.wictro.chatroom.repository.ChatroomEntityRepository;
 import com.wictro.chatroom.service.AuthService;
 import com.wictro.chatroom.service.ChatroomService;
 import org.springframework.stereotype.Controller;
@@ -83,8 +82,9 @@ public class ChatroomController {
         }
 
         //validate name...
+        //validate password...
 
-        chatroomService.createChatroom(user, chatroomEntity.getDisplayName());
+        chatroomService.createChatroom(user, chatroomEntity.getDisplayName(), chatroomEntity.getPassword());
 
         try {
             response.sendRedirect("/dashboard");
@@ -173,7 +173,7 @@ public class ChatroomController {
             return "error-templates/unauthorized";
         }
 
-        boolean success = chatroomService.saveUserToChatroom(user, chatroomEntity.getChatroomCode());
+        boolean success = chatroomService.saveUserToChatroom(user, chatroomEntity.getChatroomCode(), chatroomEntity.getPassword());
 
         if(!success)
             return "error-templates/wrong";

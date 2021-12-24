@@ -38,10 +38,12 @@
         </div>
         <form method="post" action="/chatroom" id="popup-create" class="popup-form-container">
             <input type="text" placeholder="chatroom name" name="displayName"><br>
+            <input type="password" placeholder="secret" name="password"><br>
             <input type="submit" value="create">
         </form>
         <form method="post" action="/chatroom/join" id="popup-join" class="popup-form-container" style="display: none">
             <input type="text" placeholder="chatroom code" name="chatroomCode"><br>
+            <input type="password" placeholder="secret" name="password"><br>
             <input type="submit" value="join">
         </form>
     </div>
