@@ -8,7 +8,6 @@ import java.sql.Timestamp;
 
 @Entity
 public class ChatEntity {
-    @JsonIgnore
     @Id
     @Column(name = "chat_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
