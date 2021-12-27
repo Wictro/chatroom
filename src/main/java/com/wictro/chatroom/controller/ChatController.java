@@ -17,6 +17,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/chatroom/{code}")
 public class ChatController {
@@ -37,7 +38,7 @@ public class ChatController {
 
     @GetMapping("/chat")
     public List<ChatEntity> getChats(@PathVariable("code") String code,
-                                     @RequestParam(name="index", required = false) Integer lastChatIndex,
+                                     @RequestParam(name="index", required = false) Long lastChatIndex,
                                      HttpServletRequest request){
 
         UserEntity user = authService.getLoggedInUser(request.getCookies());
@@ -53,7 +54,11 @@ public class ChatController {
         if(!chatroomService.isMember(user, chatroom))
             return null;
 
-        return chatroom.getChats();
+        if(lastChatIndex == null)
+            return chatroom.getChats();
+        else{
+            return chatService.getNewChats(lastChatIndex, chatroom);
+        }
     }
 
     @PostMapping("/chat")
