@@ -3,6 +3,7 @@ package com.wictro.chatroom.service;
 import com.wictro.chatroom.model.ChatroomEntity;
 import com.wictro.chatroom.model.ChatroomMembershipEntity;
 import com.wictro.chatroom.model.UserEntity;
+import com.wictro.chatroom.repository.ChatEntityRepository;
 import com.wictro.chatroom.repository.ChatroomEntityRepository;
 import com.wictro.chatroom.repository.ChatroomMembershipEntityRepository;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import java.util.Random;
 public class ChatroomService {
     private final ChatroomMembershipEntityRepository chatroomMembershipEntityRepository;
     private final ChatroomEntityRepository chatroomEntityRepository;
+    private final ChatEntityRepository chatEntityRepository;
 
     public ChatroomEntity getChatroomFromCodeIfUserIsMember(UserEntity user, String chatroomCode){
         ChatroomEntity chatroom = chatroomEntityRepository.findChatroomEntityByChatroomCode(chatroomCode);
@@ -24,6 +26,16 @@ public class ChatroomService {
         }
 
         return null;
+    }
+
+    @Transactional
+    public void deleteChatroom(ChatroomEntity chatroom){
+        //first we delete all memberships
+        chatroomMembershipEntityRepository.deleteAllByChatroomEntity(chatroom);
+        //delete all the chats
+        chatEntityRepository.deleteAllByChatroomEntity(chatroom);
+        //finally delete the chatroom
+        chatroomEntityRepository.delete(chatroom);
     }
 
     public List<UserEntity> getChatroomMembers(ChatroomEntity chatroom){
@@ -43,9 +55,11 @@ public class ChatroomService {
         return chatroomMembershipEntityRepository.findChatroomMembershipEntityByChatroomEntityAndUserEntity(chatroom, user) != null;
     }
 
-    public ChatroomService(ChatroomMembershipEntityRepository chatroomMembershipEntityRepository, ChatroomEntityRepository chatroomEntityRepository) {
+    public ChatroomService(ChatroomMembershipEntityRepository chatroomMembershipEntityRepository, ChatroomEntityRepository chatroomEntityRepository,
+                           ChatEntityRepository chatEntityRepository) {
         this.chatroomMembershipEntityRepository = chatroomMembershipEntityRepository;
         this.chatroomEntityRepository = chatroomEntityRepository;
+        this.chatEntityRepository = chatEntityRepository;
     }
 
     public void createChatroom(UserEntity userEntity, String chatroomName, String chatroomPassword){

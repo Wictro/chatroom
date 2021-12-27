@@ -3,6 +3,7 @@ package com.wictro.chatroom.controller;
 import com.wictro.chatroom.dto.request.ChatroomUpdateRequest;
 import com.wictro.chatroom.model.ChatroomEntity;
 import com.wictro.chatroom.model.UserEntity;
+import com.wictro.chatroom.repository.ChatroomEntityRepository;
 import com.wictro.chatroom.service.AuthService;
 import com.wictro.chatroom.service.ChatroomService;
 import org.springframework.stereotype.Controller;
@@ -19,10 +20,12 @@ import java.util.List;
 public class ChatroomController {
     private final AuthService authService;
     private final ChatroomService chatroomService;
+    private final ChatroomEntityRepository chatroomEntityRepository;
 
-    public ChatroomController(AuthService authService, ChatroomService chatroomService) {
+    public ChatroomController(AuthService authService, ChatroomService chatroomService, ChatroomEntityRepository chatroomEntityRepository) {
         this.authService = authService;
         this.chatroomService = chatroomService;
+        this.chatroomEntityRepository = chatroomEntityRepository;
     }
 
     //returns a chatroom template
@@ -96,8 +99,42 @@ public class ChatroomController {
     }
 
     //delete a chatroom
-    @DeleteMapping("")
-    public String deleteChatroom(){
+    @DeleteMapping("/{code}")
+    public String deleteChatroom(@PathVariable("code") String code, HttpServletRequest request, HttpServletResponse response){
+        UserEntity user = authService.getLoggedInUser(request.getCookies());
+        if(user == null){
+            try {
+                response.sendRedirect("/auth/login");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        if(code == null){
+            try {
+                response.sendRedirect("/dashboard");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        ChatroomEntity chatroom = chatroomEntityRepository.findChatroomEntityByChatroomCode(code);
+
+        if(!chatroom.getChatroomOwner().equals(user))
+            return "error-templates/unauthorized";
+
+        chatroomService.deleteChatroom(chatroom);
+
+        try {
+            response.sendRedirect("/dashboard");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         return null;
     }
 
@@ -160,6 +197,7 @@ public class ChatroomController {
         return null;
     }
 
+    //kick a user out of the chatroom - if admin can do this
     @DeleteMapping("/users")
     public String removeUserFromChatroom(){
         return null;

@@ -15,4 +15,6 @@ public interface ChatroomMembershipEntityRepository extends CrudRepository<Chatr
     List<UserEntity> findAllUsersByChatroom(ChatroomEntity chatroom);
 
     void deleteChatroomMembershipEntityByChatroomEntityAndUserEntity(ChatroomEntity chatroom, UserEntity user);
+
+    void deleteAllByChatroomEntity(ChatroomEntity chatroom);
 }
