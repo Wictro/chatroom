@@ -29,7 +29,9 @@ public class AuthController {
     }
 
     @GetMapping("/login")
-    public String getLogin(Model model, HttpServletRequest request, HttpServletResponse response, @RequestParam(name = "deleted", required = false) boolean deleted){
+    public String getLogin(Model model, HttpServletRequest request, HttpServletResponse response,
+                           @RequestParam(name = "nomatch", required = false) boolean nomatch,
+                           @RequestParam(name="success", required = false) boolean success){
         //if the user is logged in, redirect them to the dashboard page
         if(authService.userIsLoggedIn(request.getCookies())){
             try {
@@ -43,14 +45,20 @@ public class AuthController {
         authService.invalidateClientSessionCookies(response);
 
         model.addAttribute("loginModel", new LoginModel());
-        if(deleted)
-            model.addAttribute("error", "The username and password you entered don't match!");
+
+        if(nomatch)
+            model.addAttribute("nomatch", "that username and password don't match");
+        else if(success)
+            model.addAttribute("success", "account created successfully");
+
         return "auth-templates/login";
     }
 
     @GetMapping("/signup")
-    public String getSignup(Model model){
+    public String getSignup(Model model, @RequestParam(name = "exists", required = false) boolean exists){
         model.addAttribute("user", new UserEntity());
+        if(exists)
+            model.addAttribute("exists", "that account already exists");
         return "auth-templates/signup";
     }
 
@@ -91,16 +99,17 @@ public class AuthController {
         //if the user exists, tell them
         if(authService.userExists(user.getEmail())){
             model.addAttribute("user", new UserEntity());
-            model.addAttribute("error", "The email you entered is already registered!");
-            return "auth-templates/signup";
+
+            response.sendRedirect("/auth/signup?exists=true");
+
+            return null;
         }
 
         //save user
         userEntityRepository.save(user);
 
         //redirect to login
-        model.addAttribute("registerSuccess", "Your account was registered successfully - You can now log in with your credentials!");
-        response.sendRedirect("/auth/login");
+        response.sendRedirect("/auth/login?success=true");
 
         return null;
     }
