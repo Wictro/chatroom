@@ -40,3 +40,26 @@ form legend{
     background: white;
     margin-left: 10px;
 }
+
+.success{
+    background: #4f914f !important;
+    color: white !important;
+}
+
+.danger{
+    background: #cd3d3d !important;
+    color: black !important;
+}
+
+.alert{
+    position: absolute;
+    margin-left: 8px;
+    margin-right: 8px;
+    bottom: 8px;
+    right: 8px;
+    left: 8px;
+    padding: 16px;
+    opacity: 0;
+    transition: opacity .4s ease;
+    display: none;
+}

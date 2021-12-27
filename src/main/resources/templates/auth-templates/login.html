@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/styles/style-form.css">
     <link rel="stylesheet" href="/styles/style-navigation.css">
     <link rel="stylesheet" href="/styles/style.css">
+    <script src="/js/alerts.js"></script>
     <title>Log In</title>
 </head>
 <body>
@@ -25,5 +26,19 @@
         </fieldset>
     </form>
 </div>
+
+<script th:inline="javascript" th:if="${success != null || nomatch != null}">
+    /*<![CDATA[*/
+    let success = /*[[${success}]]*/ null;
+    let nomatch = /*[[${nomatch}]]*/ null;
+    /*]]>*/
+
+    if(success)
+        customAlert(success, true, 5000);
+
+    if(nomatch)
+        customAlert(nomatch, false, 5000);
+</script>
+
 </body>
 </html>

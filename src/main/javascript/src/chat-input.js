@@ -1,20 +1,23 @@
 let inputArea = document.querySelector(".chat-input");
 
-let baseUrl = 'http://10.45.0.28:8085';
+let baseUrl = 'http://localhost:8085';
+
+let chatIdCounter = 0;
 
 function setupChatInput(){
     inputArea = document.querySelector(".chat-input");
 }
 
 function updateChat(){
-    fetch(`${baseUrl}/chatroom/${window.chatroomId}/chat`)
+    fetch(`${baseUrl}/chatroom/${window.chatroomId}/chat?index=${chatIdCounter}`)
         .then(response => response.json())
         .then(data => {
-            clearChat();
+            //clearChat();
             for(let i = 0; i < data.length; i++){
                 let chat = data[i];
                 appendMessage(chat.text, chat.sender.firstName + ' ' + chat.sender.lastName);
                 scrollToBottom();
+                chatIdCounter = chat.id;
             }
         })
 

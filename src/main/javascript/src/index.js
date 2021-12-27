@@ -1,6 +1,5 @@
 import setupButtonFunctions from "./chat-button-functions";
 import {setupChatInput, sendText, inputArea, updateChat, scrollToBottom, baseUrl} from "./chat-input";
-import 'whatwg-fetch'
 
 window.chatroomId = location.pathname.split("/")[2];
 
@@ -37,7 +36,7 @@ function getUpdatedChatroomDetails(){
 let updateChatroomButton = document.querySelector("#updateChatroomButton");
 
 updateChatroomButton?.addEventListener("click", () => {
-    fetch(`http://10.45.0.160:8085/chatroom/${window.chatroomId}`, {
+    fetch(`${baseUrl}/chatroom/${window.chatroomId}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -66,8 +65,8 @@ let deleteChatroomButton = document.querySelector("#deleteChatroomButton");
 deleteChatroomButton?.addEventListener("click", () => {
     if(window.confirm("Are you sure you want to delete this chatroom?")){
         clearInterval(updateInterval);
-        fetch(`${baseUrl}/chatroom/${window.chatroomId}/leave`, {
-            method: 'POST'
+        fetch(`${baseUrl}/chatroom/${window.chatroomId}`, {
+            method: 'DELETE'
         }).then(response => {
             location.href = `${baseUrl}/dashboard`;
         });

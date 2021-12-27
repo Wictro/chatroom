@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/styles/style-form.css">
     <link rel="stylesheet" href="/styles/style-navigation.css">
     <link rel="stylesheet" href="/styles/style.css">
+    <script src="/js/alerts.js"></script>
     <title>Sign Up</title>
 </head>
 <body>
@@ -27,5 +28,12 @@
         </fieldset>
     </form>
 </div>
+
+<script th:inline="javascript" th:if="${exists != null}">
+    /*<![CDATA[*/ let exists = /*[[${exists}]]*/ null; /*]]>*/
+
+    if(exists)
+        customAlert(exists, false);
+</script>
 </body>
 </html>
