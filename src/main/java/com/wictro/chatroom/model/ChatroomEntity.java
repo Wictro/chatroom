@@ -3,8 +3,7 @@ package com.wictro.chatroom.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.sql.Time;
-import java.util.ArrayList;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
@@ -15,7 +14,7 @@ public class ChatroomEntity {
     private Long id;
 
     private String chatroomCode;
-    private java.sql.Time createdAt;
+    private Timestamp createdAt;
 
     @ManyToOne
     @JoinColumn(name = "owner_id", referencedColumnName = "user_id")
@@ -47,6 +46,7 @@ public class ChatroomEntity {
         this.setChatroomCode(chatroomCode);
         this.setChatroomOwner(userEntity);
         this.setPassword(chatroomPassword);
+        this.setCreatedAt(new java.sql.Timestamp(System.currentTimeMillis()));
     }
 
     public ChatroomEntity(){}
@@ -67,11 +67,11 @@ public class ChatroomEntity {
         this.chatroomCode = chatroomCode;
     }
 
-    public Time getCreatedAt() {
+    public Timestamp getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Time createdAt) {
+    public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
 

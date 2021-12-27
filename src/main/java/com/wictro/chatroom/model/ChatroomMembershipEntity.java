@@ -1,7 +1,7 @@
 package com.wictro.chatroom.model;
 
 import javax.persistence.*;
-import java.sql.Time;
+import java.sql.Timestamp;
 
 @Entity
 public class ChatroomMembershipEntity {
@@ -17,13 +17,14 @@ public class ChatroomMembershipEntity {
     @JoinColumn(name = "chatroom_id", referencedColumnName = "chatroom_id")
     private ChatroomEntity chatroomEntity;
 
-    private java.sql.Time joinedSince;
+    private Timestamp joinedSince;
 
     public ChatroomMembershipEntity(){}
 
     public ChatroomMembershipEntity(UserEntity userEntity, ChatroomEntity chatroomEntity){
         this.userEntity = userEntity;
         this.chatroomEntity = chatroomEntity;
+        this.joinedSince = new java.sql.Timestamp(System.currentTimeMillis());
     }
 
     public Long getId() {
@@ -50,11 +51,11 @@ public class ChatroomMembershipEntity {
         this.chatroomEntity = chatroomEntity;
     }
 
-    public Time getJoinedSince() {
+    public Timestamp getJoinedSince() {
         return joinedSince;
     }
 
-    public void setJoinedSince(Time joinedSince) {
+    public void setJoinedSince(Timestamp joinedSince) {
         this.joinedSince = joinedSince;
     }
 }

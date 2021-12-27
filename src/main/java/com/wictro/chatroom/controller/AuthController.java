@@ -105,6 +105,8 @@ public class AuthController {
             return null;
         }
 
+        user.setCreatedAt(new java.sql.Timestamp(System.currentTimeMillis()));
+
         //save user
         userEntityRepository.save(user);
 

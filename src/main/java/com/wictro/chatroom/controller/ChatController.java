@@ -1,7 +1,6 @@
 package com.wictro.chatroom.controller;
 
 import com.wictro.chatroom.dto.request.ChatRequest;
-import com.wictro.chatroom.dto.response.Chat;
 import com.wictro.chatroom.model.ChatEntity;
 import com.wictro.chatroom.model.ChatroomEntity;
 import com.wictro.chatroom.model.UserEntity;
@@ -9,12 +8,9 @@ import com.wictro.chatroom.repository.ChatroomEntityRepository;
 import com.wictro.chatroom.service.AuthService;
 import com.wictro.chatroom.service.ChatService;
 import com.wictro.chatroom.service.ChatroomService;
-import org.apache.tomcat.jni.Time;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin

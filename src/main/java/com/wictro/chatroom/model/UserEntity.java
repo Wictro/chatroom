@@ -20,7 +20,7 @@ public class UserEntity {
 
     @JsonIgnore
     private String password;
-    private Date createdAt;
+    private Timestamp createdAt;
 
     @JsonIgnore
     @OneToMany(mappedBy = "chatroomOwner")
@@ -74,7 +74,7 @@ public class UserEntity {
         return createdAt;
     }
 
-    public void setCreatedAt(Time accountSince) {
+    public void setCreatedAt(Timestamp accountSince) {
         this.createdAt = accountSince;
     }
 }

@@ -15,7 +15,7 @@ function updateChat(){
             //clearChat();
             for(let i = 0; i < data.length; i++){
                 let chat = data[i];
-                appendMessage(chat.text, chat.sender.firstName + ' ' + chat.sender.lastName);
+                appendMessage(chat.text, chat.sender.firstName + ' ' + chat.sender.lastName, chat.sentDate);
                 scrollToBottom();
                 chatIdCounter = chat.id;
             }
@@ -68,7 +68,6 @@ function sendText(){
     }
 
     sendMessage(message);
-    //appendMessage(message);
 
     inputArea.querySelector('textarea').value = "";
 }
@@ -85,13 +84,13 @@ function sendMessage(message){
     })
 }
 
-function appendMessage(message, sender){
+function appendMessage(message, sender, time){
     let chatBody = document.querySelector(".chat-body");
 
-    chatBody.innerHTML += messageTemplate(message, sender);
+    chatBody.innerHTML += messageTemplate(message, sender, time);
 }
 
-function messageTemplate(message, sender){
+function messageTemplate(message, sender, time){
     return `<div class="chat-element">
     <div class="chat-element-head">
         <div class="chat-element-head-name">
@@ -99,7 +98,7 @@ function messageTemplate(message, sender){
         </div>
 
         <div class="chat-element-head-time">
-            ${getFormattedTime()}
+            ${getFormattedTime(time)}
         </div>
     </div>
 
@@ -109,13 +108,15 @@ function messageTemplate(message, sender){
 </div>`
 }
 
-function getFormattedTime(){
-    let date = new Date();
+function getFormattedTime(time){
+    let timeOnly = time.split(" ")[4].split(":"); //Mon, 27 Dec 2021 21:11:05 UTC
 
-    let hour = date.getHours();
-    let minutes = date.getMinutes() < 10? "0" + date.getMinutes() : date.getMinutes();
+    let offsetMinutes = new Date().getTimezoneOffset();
 
-    return hour + ":" + minutes;
+    let hours = timeOnly[0] - (offsetMinutes/60);
+    let minutes = timeOnly[1];
+
+    return hours + ":" + minutes;
 }
 
 export {setupChatInput, sendText, inputArea, updateChat, scrollToBottom, baseUrl};

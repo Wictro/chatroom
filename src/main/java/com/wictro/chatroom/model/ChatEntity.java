@@ -1,5 +1,6 @@
 package com.wictro.chatroom.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -22,6 +23,7 @@ public class ChatEntity {
     @JoinColumn(name="sender_id", referencedColumnName = "user_id")
     private UserEntity sender;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "E, dd MMM yyyy HH:mm:ss z")
     private java.sql.Timestamp sentDate;
 
     private String text;
