@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.sql.Time;
 import java.sql.Timestamp;
 
 @Entity
@@ -23,15 +22,14 @@ public class ChatEntity {
     @JoinColumn(name="sender_id", referencedColumnName = "user_id")
     private UserEntity sender;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "E, dd MMM yyyy HH:mm:ss z")
-    private java.sql.Timestamp sentDate;
+    private java.sql.Timestamp sentTime;
 
     private String text;
 
     public ChatEntity(ChatroomEntity chatroomEntity, UserEntity sender, Timestamp sentDate, String text) {
         this.chatroomEntity = chatroomEntity;
         this.sender = sender;
-        this.sentDate = sentDate;
+        this.sentTime = sentDate;
         this.text = text;
     }
 
@@ -61,12 +59,12 @@ public class ChatEntity {
         this.sender = sender;
     }
 
-    public Timestamp getSentDate() {
-        return sentDate;
+    public Timestamp getSentTime() {
+        return sentTime;
     }
 
-    public void setSentDate(Timestamp sentDate) {
-        this.sentDate = sentDate;
+    public void setSentTime(Timestamp sentDate) {
+        this.sentTime = sentDate;
     }
 
     public String getText() {

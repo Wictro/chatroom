@@ -15,7 +15,7 @@ function updateChat(){
             //clearChat();
             for(let i = 0; i < data.length; i++){
                 let chat = data[i];
-                appendMessage(chat.text, chat.sender.firstName + ' ' + chat.sender.lastName, chat.sentDate);
+                appendMessage(chat.text, chat.sender.firstName + ' ' + chat.sender.lastName, chat.sentTime);
                 scrollToBottom();
                 chatIdCounter = chat.id;
             }
@@ -113,10 +113,10 @@ function getFormattedTime(time){
 
     let offsetMinutes = new Date().getTimezoneOffset();
 
-    let hours = timeOnly[0] - (offsetMinutes/60);
+    let hours = (timeOnly[0] - (offsetMinutes/60)) % 24;
     let minutes = timeOnly[1];
 
-    return hours + ":" + minutes;
+    return (hours >= 10? hours : "0" + hours) + ":" + minutes;
 }
 
 export {setupChatInput, sendText, inputArea, updateChat, scrollToBottom, baseUrl};

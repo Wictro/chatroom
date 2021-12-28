@@ -1,6 +1,8 @@
 package com.wictro.chatroom.controller;
 
 import com.wictro.chatroom.dto.request.ChatRequest;
+import com.wictro.chatroom.dto.response.ChatResponse;
+import com.wictro.chatroom.dto.response.ChatSenderReponse;
 import com.wictro.chatroom.model.ChatEntity;
 import com.wictro.chatroom.model.ChatroomEntity;
 import com.wictro.chatroom.model.UserEntity;
@@ -8,10 +10,13 @@ import com.wictro.chatroom.repository.ChatroomEntityRepository;
 import com.wictro.chatroom.service.AuthService;
 import com.wictro.chatroom.service.ChatService;
 import com.wictro.chatroom.service.ChatroomService;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @CrossOrigin
 @RestController
@@ -22,18 +27,22 @@ public class ChatController {
     private final ChatroomService chatroomService;
     private final ChatService chatService;
 
+    private final ModelMapper modelMapper;
+
     public ChatController(AuthService authService, ChatroomEntityRepository chatroomEntityRepository,
                           ChatroomService chatroomService,
-                          ChatService chatService) {
+                          ChatService chatService,
+                          ModelMapper modelMapper) {
         this.authService = authService;
         this.chatroomEntityRepository = chatroomEntityRepository;
         this.chatroomService = chatroomService;
         this.chatService = chatService;
+        this.modelMapper = modelMapper;
     }
 
 
     @GetMapping("/chat")
-    public List<ChatEntity> getChats(@PathVariable("code") String code,
+    public List<ChatResponse> getChats(@PathVariable("code") String code,
                                      @RequestParam(name="index", required = false) Long lastChatIndex,
                                      HttpServletRequest request){
 
@@ -50,10 +59,16 @@ public class ChatController {
         if(!chatroomService.isMember(user, chatroom))
             return null;
 
-        if(lastChatIndex == null)
-            return chatroom.getChats();
+        if(lastChatIndex == null){
+            //return chatroom.getChats();
+             return chatroom.getChats().stream()
+                    .map(this::convertToDto)
+                    .collect(Collectors.toList());
+        }
         else{
-            return chatService.getNewChats(lastChatIndex, chatroom);
+            return chatService.getNewChats(lastChatIndex, chatroom).stream()
+                    .map(this::convertToDto)
+                    .collect(Collectors.toList());
         }
     }
 
@@ -77,5 +92,14 @@ public class ChatController {
 
         //save chat to database
         chatService.saveChat(chatroom, user, message);
+    }
+
+    private ChatResponse convertToDto(ChatEntity chatEntity){
+        ChatResponse chatResponse = modelMapper.map(chatEntity, ChatResponse.class);
+        chatResponse.setText(chatEntity.getText());
+        chatResponse.setSender(new ChatSenderReponse(chatEntity.getSender().getId(), chatEntity.getSender().getFirstName(), chatEntity.getSender().getLastName()));
+        chatResponse.setSentTime(chatEntity.getSentTime());
+        chatResponse.setId(chatEntity.getId());
+        return chatResponse;
     }
 }
