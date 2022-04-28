@@ -35,6 +35,7 @@ public class DashboardController {
         }
 
         model.addAttribute("chatrooms", userEntityRepository.getUserChatrooms(user));
+        model.addAttribute("user", user); //1 rresht
         return "dashboard";
     }
 }

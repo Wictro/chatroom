@@ -96,6 +96,16 @@
     margin: 8px;
 }
 
+.art-content{
+    justify-content: center;
+    align-items: center;
+}
+
+.user-info{
+    text-align: center;
+    color: white;
+}
+
 @media (max-width:480px){
 
     .chatrooms-container{
