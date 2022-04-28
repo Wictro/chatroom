@@ -16,80 +16,86 @@
           rel="stylesheet">
 </head>
 <body>
-<div class="navigation-container single">
-    <a href="/dashboard">back to dashboard</a>
-</div>
-
-<div class="chat-container">
-    <div class="chat-header">
-        <div class=chat-title th:text="${chatroom.getDisplayName()} + ' [' + ${chatroom.getChatroomCode()} + ']'"></div>
-
-        <div class="chat-header-settings">
-            <span class="material-icons">settings</span>
-        </div>
-        <!--More to come here-->
+<div class="main-content">
+    <div class="navigation-container single">
+        <a href="/dashboard">back to dashboard</a>
     </div>
 
-    <div class="chat-body">
+    <div class="chat-container">
+        <div class="chat-header">
+            <div class=chat-title th:text="${chatroom.getDisplayName()} + ' [' + ${chatroom.getChatroomCode()} + ']'"></div>
 
-    </div>
-
-    <div class="chat-input">
-        <textarea placeholder="Enter some text" rows=1></textarea>
-    </div>
-
-    <div class="chat-settings-container">
-        <div class="chat-settings-header">
-            <span class="material-icons">arrow_back_ios</span>
-            <div>Settings</div>
+            <div class="chat-header-settings">
+                <span class="material-icons">settings</span>
+            </div>
+            <!--More to come here-->
         </div>
 
+        <div class="chat-body">
 
-        <div class="chat-settings-body">
-                <fieldset class="chat-settings-info">
-                    <legend>info</legend>
-                    <!--Contains chat id, chat name-->
-                    <!--Admins also see chat name and can edit both name and password-->
+        </div>
+
+        <div class="chat-input">
+            <span class="material-icons" id="emojiPicker-button">sentiment_satisfied_alt</span>
+            <textarea placeholder="Enter some text" rows=1></textarea>
+            <span class="material-icons" id="send-button">send</span>
+        </div>
+
+        <div class="chat-settings-container">
+            <div class="chat-settings-header">
+                <span class="material-icons">arrow_back_ios</span>
+                <div>Settings</div>
+            </div>
+
+
+            <div class="chat-settings-body">
+                    <fieldset class="chat-settings-info">
+                        <legend>info</legend>
+                        <!--Contains chat id, chat name-->
+                        <!--Admins also see chat name and can edit both name and password-->
+                        <table>
+                            <tr>
+                                <td style="text-align: right;">code:</td>
+                                <td><input type="text" th:value="${chatroom.getChatroomCode()}" disabled></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;">name:</td>
+                                <td><input th:disabled="${!owner}" type="text" th:value="${chatroom.getDisplayName()}" name="displayName" id="newChatroomName"></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;">secret:</td>
+                                <td><input th:disabled="${!owner}" type="text" th:value="${chatroom.getPassword()}" name="password" id="newChatroomSecret"></td>
+                            </tr>
+                        </table>
+
+                        <input th:if="${owner}" type="submit" value="save" id="updateChatroomButton">
+
+                    </fieldset>
+
+                <fieldset class="chat-settings-members">
+                    <legend>members</legend>
+
                     <table>
-                        <tr>
-                            <td style="text-align: right;">code:</td>
-                            <td><input type="text" th:value="${chatroom.getChatroomCode()}" disabled></td>
+                        <tbody>
+                        <tr th:each="member, iStat : ${members}">
+                            <td th:text="${iStat.count} + ':'"></td>
+                            <td th:text="${member.getFirstName()} + ' ' + ${member.getLastName()}"></td>
                         </tr>
-                        <tr>
-                            <td style="text-align: right;">name:</td>
-                            <td><input th:disabled="${!owner}" type="text" th:value="${chatroom.getDisplayName()}" name="displayName" id="newChatroomName"></td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: right;">secret:</td>
-                            <td><input th:disabled="${!owner}" type="text" th:value="${chatroom.getPassword()}" name="password" id="newChatroomSecret"></td>
-                        </tr>
+                        </tbody>
                     </table>
-
-                    <input th:if="${owner}" type="submit" value="save" id="updateChatroomButton">
-
+                    <!--Contains current chatroom members and tells if they are admins-->
+                    <!--Admins can edit members by deleting them or promoting them to admins-->
+                    <!--Admins have an extra row to invite other users-->
                 </fieldset>
 
-            <fieldset class="chat-settings-members">
-                <legend>members</legend>
-
-                <table>
-                    <tbody>
-                    <tr th:each="member, iStat : ${members}">
-                        <td th:text="${iStat.count} + ':'"></td>
-                        <td th:text="${member.getFirstName()} + ' ' + ${member.getLastName()}"></td>
-                    </tr>
-                    </tbody>
-                </table>
-                <!--Contains current chatroom members and tells if they are admins-->
-                <!--Admins can edit members by deleting them or promoting them to admins-->
-                <!--Admins have an extra row to invite other users-->
-            </fieldset>
-
-            <input th:if="${!owner}" id = "leaveChatroomButton" class="danger" type="button" value="leave this chatroom">
-            <input th:if="${owner}" id = "deleteChatroomButton" class="danger" type="button" value="delete this chatroom">
+                <input th:if="${!owner}" id = "leaveChatroomButton" class="danger" type="button" value="leave this chatroom">
+                <input th:if="${owner}" id = "deleteChatroomButton" class="danger" type="button" value="delete this chatroom">
+            </div>
         </div>
     </div>
 </div>
+
+<div class="art-content"></div>
 
 <script src="/js/main.js"></script>
 </body>

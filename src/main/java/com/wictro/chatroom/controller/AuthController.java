@@ -1,6 +1,6 @@
 package com.wictro.chatroom.controller;
 
-import com.wictro.chatroom.model.LoginModel;
+import com.wictro.chatroom.dto.response.LoginModel;
 import com.wictro.chatroom.model.UserEntity;
 import com.wictro.chatroom.repository.SessionEntityRepository;
 import com.wictro.chatroom.repository.UserEntityRepository;

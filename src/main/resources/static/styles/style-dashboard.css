@@ -1,5 +1,5 @@
 .chatrooms-container{
-    width: 100%;
+    width: auto;
     padding: 8px;
     display: flex;
     flex-direction: row;
@@ -11,7 +11,7 @@
 
 .chatroom-info-element{
     text-align: center;
-    border: 3px solid #424242;
+    border: 3px solid #1a1a1a;
     margin-right: 8px;
     padding: 16px;
     position: relative;
@@ -25,7 +25,7 @@
 }
 
 .chatroom-info-element:hover{
-    background: #424242;
+    background: #1a1a1a;
     color: white;
 }
 
@@ -42,7 +42,7 @@
     right: 5px;
     height: 2px;
     border: 0;
-    background: #43ff43;
+    background: #40cf40;
 }
 
 .new-chatroom{
@@ -55,7 +55,7 @@
 .new-chatroom span{
     font-size: 42px;
     cursor: pointer;
-    color: #424242;
+    color: #1a1a1a;
 }
 
 .popup-background-container{
@@ -75,9 +75,10 @@
 
 .popup-container{
     background: white;
-    border: 3px solid #424242;
-    min-width: 350px;
+    border: 3px solid #1a1a1a;
+    max-width: 600px;
     z-index: 1;
+    box-sizing: border-box;
 }
 
 .popup-selection{
@@ -90,7 +91,25 @@
 }
 
 .popup-form-container{
-    width: 100%;
+    width: auto;
     height: 100%;
     margin: 8px;
+}
+
+@media (max-width:480px){
+
+    .chatrooms-container{
+        width: auto;
+    }
+
+    .new-chatroom, .chatroom-info-element{
+        margin-right: 0;
+        width: 100%;
+    }
+
+    .popup-container{
+        margin-left: 10px;
+        margin-right: 10px;
+        width: 100%;
+    }
 }

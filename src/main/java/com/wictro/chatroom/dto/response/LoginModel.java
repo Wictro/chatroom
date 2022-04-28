@@ -1,4 +1,4 @@
-package com.wictro.chatroom.model;
+package com.wictro.chatroom.dto.response;
 
 public class LoginModel {
     private String email;

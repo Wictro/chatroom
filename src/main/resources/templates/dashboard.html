@@ -13,44 +13,48 @@
     <title>Dashboard</title>
 </head>
 <body>
-<div class="navigation-container single">
-    <a href="/auth/signout">sign out</a>
-</div>
-
-<div class="chatrooms-container">
-
-    <div class="new-chatroom">
-        <span class="material-icons">add</span>
+<div class="main-content">
+    <div class="navigation-container single">
+        <a href="/auth/signout">sign out</a>
     </div>
 
-    <div class="chatroom-info-element" th:each="chatroom : ${chatrooms}" th:attr="onclick=|openChatroom('${chatroom.getChatroomCode()}')|" >
-        <h2 class="chatroom-info-name" th:text="${chatroom.getDisplayName()}"></h2>
-        <h3 class="chatroom-info-code" th:text="'[' + ${chatroom.getChatroomCode()} + ']'"></h3>
-        <hr>
-    </div>
-</div>
+    <div class="chatrooms-container">
 
-<div class="popup-background-container" style="display: none">
-    <div class="popup-container">
-        <div class="navigation-container">
-            <a class="active">create chatroom</a>
-            <a>join chatroom</a>
+        <div class="new-chatroom">
+            <span class="material-icons">add</span>
         </div>
-        <form method="post" action="/chatroom" id="popup-create" class="popup-form-container">
-            <input type="text" placeholder="chatroom name" name="displayName"><br>
-            <input type="password" placeholder="secret" name="password"><br>
-            <input type="submit" value="create">
-        </form>
-        <form method="post" action="/chatroom/join" id="popup-join" class="popup-form-container" style="display: none">
-            <input type="text" placeholder="chatroom code" name="chatroomCode"><br>
-            <input type="password" placeholder="secret" name="password"><br>
-            <input type="submit" value="join">
-        </form>
+
+        <div class="chatroom-info-element" th:each="chatroom : ${chatrooms}" th:attr="onclick=|openChatroom('${chatroom.getChatroomCode()}')|" >
+            <h2 class="chatroom-info-name" th:text="${chatroom.getDisplayName()}"></h2>
+            <h3 class="chatroom-info-code" th:text="'[' + ${chatroom.getChatroomCode()} + ']'"></h3>
+            <hr>
+        </div>
     </div>
 
+    <div class="popup-background-container" style="display: none">
+        <div class="popup-container">
+            <div class="navigation-container">
+                <a class="active">create chatroom</a>
+                <a>join chatroom</a>
+            </div>
+            <form method="post" action="/chatroom" id="popup-create" class="popup-form-container">
+                <input type="text" placeholder="chatroom name" name="displayName"><br>
+                <input type="password" placeholder="secret" name="password"><br>
+                <input type="submit" value="create">
+            </form>
+            <form method="post" action="/chatroom/join" id="popup-join" class="popup-form-container" style="display: none">
+                <input type="text" placeholder="chatroom code" name="chatroomCode"><br>
+                <input type="password" placeholder="secret" name="password"><br>
+                <input type="submit" value="join">
+            </form>
+        </div>
+
+    </div>
 </div>
 
+<div class="art-content">
 
+</div>
 <script src="/js/dashboard.js"></script>
 </body>
 </html>

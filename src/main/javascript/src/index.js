@@ -1,9 +1,18 @@
 import setupButtonFunctions from "./chat-button-functions";
-import {setupChatInput, sendText, inputArea, updateChat, scrollToBottom, baseUrl} from "./chat-input";
+import {
+    setupChatInput,
+    sendText,
+    inputArea,
+    updateChat,
+    scrollToBottom,
+    baseUrl,
+    getPreviousMessages
+} from "./chat-input";
+import './emoji';
 
 window.chatroomId = location.pathname.split("/")[2];
 
-updateChat();
+getPreviousMessages();
 
 let updateInterval = setInterval(() => {
     updateChat();
@@ -20,6 +29,12 @@ inputArea.addEventListener('keypress', (event) => {
         scrollToBottom();
     }
 });
+
+document.querySelector('#send-button').addEventListener('click', () => {
+    sendText();
+    scrollToBottom();
+    inputArea.querySelector('textarea').focus();
+})
 
 function getUpdatedChatroomDetails(){
     let chatroomName = document.querySelector("#newChatroomName").value;

@@ -1,11 +1,18 @@
+form{
+    background: transparent;
+}
+
 form input{
     font-family: 'Roboto Mono', monospace;
     padding: 8px 3px 8px 3px;
-    border-radius: unset;
+    border-radius: 0;
     border: unset;
     outline: none;
-    width: 550px;
     font-size: 30px;
+    color: #1a1a1a;
+    width: auto;
+    max-width: 100%;
+    background: transparent;
 }
 
 form input[type=submit]{
@@ -13,19 +20,20 @@ form input[type=submit]{
     padding: 16px;
     margin-top: 8px;
     cursor: pointer;
-    color: #424242;
-    background: white;
-    border: 3px solid #424242;
+    color: #1a1a1a;
+    background: transparent;
+    border: 3px solid #1a1a1a;
     transition: all ease .2s;
+    border-radius: 0;
 }
 
 form input[type=submit]:hover{
-    background: #424242;
+    background: #1a1a1a;
     color: white;
 }
 
 form fieldset{
-    border: 3px solid #424242;
+    border: 3px solid #1a1a1a;
     margin: 0;
 }
 
@@ -37,7 +45,7 @@ form legend{
     width: fit-content;
     height: fit-content;
     box-sizing: border-box;
-    background: white;
+    background: transparent;
     margin-left: 10px;
 }
 

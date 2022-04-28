@@ -9,6 +9,8 @@ import java.util.ArrayList;
 
 public interface UserEntityRepository extends CrudRepository<UserEntity, Long> {
     UserEntity findByEmail(String email);
+
+
     UserEntity findByEmailAndPassword(String email, String password);
 
     @Query("SELECT c.chatroomEntity from ChatroomMembershipEntity c where c.userEntity = ?1")

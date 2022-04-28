@@ -1,6 +1,6 @@
 let inputArea = document.querySelector(".chat-input");
 
-let baseUrl = 'http://localhost:8085';
+let baseUrl = location.origin;
 
 let chatIdCounter = 0;
 
@@ -8,11 +8,17 @@ function setupChatInput(){
     inputArea = document.querySelector(".chat-input");
 }
 
+function getPreviousMessages(){
+    updateChat();
+    setTimeout(() => {
+        document.querySelector(".chat-body").style.scrollBehavior = 'smooth';
+    }, 2000);
+}
+
 function updateChat(){
     fetch(`${baseUrl}/chatroom/${window.chatroomId}/chat?index=${chatIdCounter}`)
         .then(response => response.json())
         .then(data => {
-            //clearChat();
             for(let i = 0; i < data.length; i++){
                 let chat = data[i];
                 appendMessage(chat.text, chat.sender.firstName + ' ' + chat.sender.lastName, chat.sentTime);
@@ -48,12 +54,6 @@ function updateChat(){
 function scrollToBottom(){
     let chat = document.querySelector(".chat-body");
     chat.scrollTop = chat.scrollHeight;
-}
-
-function clearChat(){
-    let chatBody = document.querySelector(".chat-body");
-
-    chatBody.innerHTML = '';
 }
 
 function sendText(){
@@ -103,7 +103,9 @@ function messageTemplate(message, sender, time){
     </div>
 
     <div class="chat-element-body">
-        ${message}
+        <p>
+            ${message}
+        </p>
     </div>
 </div>`
 }
@@ -119,4 +121,4 @@ function getFormattedTime(time){
     return (hours >= 10? hours : "0" + hours) + ":" + minutes;
 }
 
-export {setupChatInput, sendText, inputArea, updateChat, scrollToBottom, baseUrl};
+export {setupChatInput, sendText, inputArea, updateChat, scrollToBottom, getPreviousMessages, baseUrl};

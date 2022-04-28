@@ -3,6 +3,7 @@ package com.wictro.chatroom.dto.response;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 public class ChatResponse {
     private ChatSenderReponse sender;
@@ -13,6 +14,13 @@ public class ChatResponse {
     private Timestamp sentTime;
 
     public ChatResponse(){}
+
+    public ChatResponse(Long id, String text, Date sentTime, Long senderId, String senderName, String senderSurname) {
+        this.text = text;
+        this.id = id;
+        this.sentTime = (Timestamp) sentTime;
+        this.sender = new ChatSenderReponse(senderId, senderName, senderSurname);
+    }
 
     public Long getId() {
         return id;

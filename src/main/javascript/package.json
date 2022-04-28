@@ -14,6 +14,7 @@
     "webpack-cli": "^4.9.1"
   },
   "dependencies": {
+    "@joeattardi/emoji-button": "^4.6.2",
     "whatwg-fetch": "^3.6.2"
   }
 }

@@ -19,7 +19,7 @@ public class AuthService {
     private final UserEntityRepository userEntityRepository;
     private final SessionEntityRepository sessionEntityRepository;
 
-    private final int EXPIRE_AFTER = 1200000;
+    private final int EXPIRE_AFTER = 12000000;
 
     public AuthService(UserEntityRepository userRepository, SessionEntityRepository sessionRepository){
         this.userEntityRepository = userRepository;

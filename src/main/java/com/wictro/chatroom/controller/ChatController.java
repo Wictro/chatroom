@@ -11,8 +11,8 @@ import com.wictro.chatroom.service.AuthService;
 import com.wictro.chatroom.service.ChatService;
 import com.wictro.chatroom.service.ChatroomService;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.HtmlUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -59,17 +59,10 @@ public class ChatController {
         if(!chatroomService.isMember(user, chatroom))
             return null;
 
-        if(lastChatIndex == null){
-            //return chatroom.getChats();
-             return chatroom.getChats().stream()
-                    .map(this::convertToDto)
-                    .collect(Collectors.toList());
-        }
-        else{
-            return chatService.getNewChats(lastChatIndex, chatroom).stream()
-                    .map(this::convertToDto)
-                    .collect(Collectors.toList());
-        }
+        if(lastChatIndex == null)
+            lastChatIndex = 0l;
+
+        return chatService.getNewChats(lastChatIndex, chatroom);
     }
 
     @PostMapping("/chat")
@@ -92,14 +85,5 @@ public class ChatController {
 
         //save chat to database
         chatService.saveChat(chatroom, user, message);
-    }
-
-    private ChatResponse convertToDto(ChatEntity chatEntity){
-        ChatResponse chatResponse = modelMapper.map(chatEntity, ChatResponse.class);
-        chatResponse.setText(chatEntity.getText());
-        chatResponse.setSender(new ChatSenderReponse(chatEntity.getSender().getId(), chatEntity.getSender().getFirstName(), chatEntity.getSender().getLastName()));
-        chatResponse.setSentTime(chatEntity.getSentTime());
-        chatResponse.setId(chatEntity.getId());
-        return chatResponse;
     }
 }

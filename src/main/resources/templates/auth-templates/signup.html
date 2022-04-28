@@ -11,23 +11,27 @@
     <title>Sign Up</title>
 </head>
 <body>
-<div class="navigation-container">
-    <a href="/auth/login">log in</a>
-    <a class="active">sign up</a>
+<div class="main-content">
+    <div class="navigation-container">
+        <a href="/auth/login">log in</a>
+        <a class="active">sign up</a>
+    </div>
+
+    <div class="form-container">
+        <form method="post" action="/auth/signup" th:object="${user}">
+            <fieldset>
+                <legend>sign up</legend>
+                <input type="text" name="firstName" th:field="${user.firstName}" placeholder="name"><br>
+                <input type="text" name="lastName" th:field="${user.lastName}" placeholder="surname"><br>
+                <input type="email" name="email" th:field="${user.email}" placeholder="email"><br>
+                <input type="password" name="password" th:field="${user.password}" placeholder="password"><br>
+                <input type="submit" value="go">
+            </fieldset>
+        </form>
+    </div>
 </div>
 
-<div class="form-container">
-    <form method="post" action="/auth/signup" th:object="${user}">
-        <fieldset>
-            <legend>sign up</legend>
-            <input type="text" name="firstName" th:field="${user.firstName}" placeholder="name"><br>
-            <input type="text" name="lastName" th:field="${user.lastName}" placeholder="surname"><br>
-            <input type="email" name="email" th:field="${user.email}" placeholder="email"><br>
-            <input type="password" name="password" th:field="${user.password}" placeholder="password"><br>
-            <input type="submit" value="go">
-        </fieldset>
-    </form>
-</div>
+<div class="art-content"></div>
 
 <script th:inline="javascript" th:if="${exists != null}">
     /*<![CDATA[*/ let exists = /*[[${exists}]]*/ null; /*]]>*/

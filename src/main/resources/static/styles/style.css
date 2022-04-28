@@ -3,4 +3,40 @@ html, body{
     width: 100%;
     height: 100%;
     margin: 0;
+    display: flex;
+}
+
+.main-content{
+    position: relative;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+    background: #d5d5d5;
+}
+
+@media (max-width:730px){
+
+    .art-content{
+        display: none !important;
+    }
+
+    .main-content{
+        width: 100% !important;
+    }
+}
+
+.art-content{
+    width: 50%;
+    background: #1a1a1a;
+    display: flex;
+    padding: 16px;
+}
+
+.art-content img{
+    width: 100%;
+    object-fit: contain;
 }

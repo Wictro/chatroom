@@ -24,15 +24,15 @@
     align-items: center;
     padding: 8px;
     box-sizing: border-box;
-    border-bottom: 3px solid #424242;
-    font-size: 14px;
+    border-bottom: 3px solid #1a1a1a;
+    font-size: 1em;
     font-weight: bolder;
 }
 
 .chat-settings-header span{
     font-size: 20px;
     cursor: pointer;
-    color: #424242;
+    color: #1a1a1a;
 }
 
 .chat-settings-body{
@@ -54,14 +54,14 @@ input[type=submit]{
     padding: 8px;
     margin-top: 8px;
     cursor: pointer;
-    color: #424242;
+    color: #1a1a1a;
     background: white;
-    border: 3px solid #424242;
+    border: 3px solid #1a1a1a;
     transition: all ease .2s;
 }
 
 input[type=submit]:hover, input:disabled{
-    background: #424242;
+    background: #1a1a1a;
     color: white;
 }
 
@@ -69,7 +69,7 @@ input{
     font-family: 'Roboto Mono', monospace;
     padding: 8px 3px 8px 3px;
     border-radius: unset;
-    border: 3px solid #424242;
+    border: 3px solid #1a1a1a;
     outline: none;
     font-size: 15px;
     background: white;
@@ -86,6 +86,6 @@ input.danger:hover{
 }
 
 fieldset{
-    border: 3px solid #424242;
+    border: 3px solid #1a1a1a;
     margin: 0;
 }

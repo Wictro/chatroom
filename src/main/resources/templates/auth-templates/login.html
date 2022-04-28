@@ -11,21 +11,25 @@
     <title>Log In</title>
 </head>
 <body>
-<div class="navigation-container">
-    <a class="active">log in</a>
-    <a href="/auth/signup">sign up</a>
+<div class="main-content">
+    <div class="navigation-container">
+        <a class="active">log in</a>
+        <a href="/auth/signup">sign up</a>
+    </div>
+
+    <div class="form-container">
+        <form method="post" action="/auth/login" th:object="${loginModel}">
+            <fieldset>
+                <legend>log in</legend>
+                <input type="email" name="email" th:field="${loginModel.email}" placeholder="email"><br>
+                <input type="password" name="password" th:field="${loginModel.password}" placeholder="password"><br>
+                <input type="submit" value="go">
+            </fieldset>
+        </form>
+    </div>
 </div>
 
-<div class="form-container">
-    <form method="post" action="/auth/login" th:object="${loginModel}">
-        <fieldset>
-            <legend>log in</legend>
-            <input type="email" name="email" th:field="${loginModel.email}" placeholder="email"><br>
-            <input type="password" name="password" th:field="${loginModel.password}" placeholder="password"><br>
-            <input type="submit" value="go">
-        </fieldset>
-    </form>
-</div>
+<div class="art-content"></div>
 
 <script th:inline="javascript" th:if="${success != null || nomatch != null}">
     /*<![CDATA[*/
